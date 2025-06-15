@@ -1,69 +1,110 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Smart Spend Analyzer</title>
-  <link rel="stylesheet" href="style.css" />
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expense Tracker Dashboard</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+    
 </head>
 <body>
-  <div class="container">
-    <h1>📊 Smart Spend Analyzer</h1>
+    <div class="container">
+        <div class="header">
+            <h1>💰 Expense Tracker</h1>
+            <p>Upload receipts and track your spending with smart analytics</p>
+        </div>
 
-    <form id="uploadForm" enctype="multipart/form-data">
-      <label for="receipt">📤 Upload Receipt Image:</label>
-      <input type="file" name="receipt" accept="image/*" required />
-      <button type="submit">Analyze Receipt</button>
-    </form>
+        <div class="dashboard-grid">
+            <!-- Upload Section -->
+            <div class="card">
+                <h2>📤 Upload Receipt</h2>
+                <form id="uploadForm" class="upload-section">
+                    <div class="upload-area" id="uploadArea">
+                        <div class="upload-icon" id="uploadIcon">📄</div>
+                        <p id="uploadText" style="margin-bottom: 15px; color: #666;">Drop your receipt here or click to browse</p>
+                        <div id="fileInfo" class="file-info" style="display: none;">
+                            <div class="file-preview">
+                                <span id="fileName"></span>
+                                <span id="fileSize"></span>
+                            </div>
+                        </div>
+                        <label for="receipt" class="file-label">Choose File</label>
+                        <input type="file" id="receipt" name="receipt" accept="image/*,.pdf" class="file-input" required>
+                    </div>
+                    <button type="submit" class="upload-btn">📤 Upload & Analyze</button>
+                </form>
 
-    <div class="filters">
-      <div class="filter-group">
-        <label for="yearSelect">📅 Year:</label>
-        <select id="yearSelect"></select>
-      </div>
-      <div class="filter-group">
-        <label for="monthSelect">📆 Month:</label>
-        <select id="monthSelect">
-          <option value="">All</option>
-          <option value="01">January</option>
-          <option value="02">February</option>
-          <option value="03">March</option>
-          <option value="04">April</option>
-          <option value="05">May</option>
-          <option value="06">June</option>
-          <option value="07">July</option>
-          <option value="08">August</option>
-          <option value="09">September</option>
-          <option value="10">October</option>
-          <option value="11">November</option>
-          <option value="12">December</option>
-        </select>
-      </div>
-      <div class="filter-buttons">
-        <button type="button" id="filterBtn">Filter</button>
-        <button type="button" id="resetBtn">Reset</button>
-      </div>
+                <div style="margin-top: 30px;">
+                    <h3 style="margin-bottom: 15px; color: #4a5568;">📊 Filter Expenses</h3>
+                    <div class="filters">
+                        <div class="filter-group">
+                            <label for="yearSelect">Year</label>
+                            <select id="yearSelect">
+                                <option value="">All Years</option>
+                            </select>
+                        </div>
+                        <div class="filter-group">
+                            <label for="monthSelect">Month</label>
+                            <select id="monthSelect">
+                                <option value="">All Months</option>
+                                <option value="01">January</option>
+                                <option value="02">February</option>
+                                <option value="03">March</option>
+                                <option value="04">April</option>
+                                <option value="05">May</option>
+                                <option value="06">June</option>
+                                <option value="07">July</option>
+                                <option value="08">August</option>
+                                <option value="09">September</option>
+                                <option value="10">October</option>
+                                <option value="11">November</option>
+                                <option value="12">December</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="filter-buttons">
+                        <button id="filterBtn" class="btn btn-primary">🔍 Apply Filter</button>
+                        <button id="resetBtn" class="btn btn-secondary">🔄 Reset</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chart Section -->
+            <div class="card">
+                <h2>📈 Monthly Spending</h2>
+                <div class="chart-container">
+                    <canvas id="expenseChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Table Section -->
+        <div class="card table-section">
+            <div class="table-header">
+                <h2>📋 Expense History</h2>
+                <div id="totalSpending" class="total-spending">
+                    <strong>Total Spending:</strong> ₹0.00
+                </div>
+            </div>
+            <div class="table-container">
+                <table id="expenseTable">
+                    <thead>
+                        <tr>
+                            <th>🏪 Merchant</th>
+                            <th>📅 Date</th>
+                            <th>💵 Amount</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Data will be populated by JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
+    <script src="script.js"></script>
 
-    <h2>🧾 Expense History</h2>
-    <table id="expenseTable">
-      <thead>
-        <tr>
-          <th>Merchant</th>
-          <th>Date</th>
-          <th>Amount</th>
-        </tr>
-      </thead>
-      <tbody></tbody>
-    </table>
-
-    <p id="totalSpending"><strong>Total Spending:</strong> ₹0.00</p>
-
-    <h2>📈 Monthly Expense Chart</h2>
-    <canvas id="expenseChart" width="400" height="200"></canvas>
-  </div>
-
-  <script src="script.js"></script>
+  
 </body>
 </html>

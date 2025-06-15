@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # 💰 SpendScan – Smart Expense Tracker with Receipt Scanner
 
 SpendScan is a smart expense tracking web app that uses **Azure Form Recognizer** to extract information from receipt images and visualize spending.
@@ -20,4 +21,6 @@ SpendScan is a smart expense tracking web app that uses **Azure Form Recognizer*
 2. Set up `.env` with Azure credentials and MongoDB URI
 3. Run the server using `node server.js`
 4. Open `frontend/index.html` in your browser
+=======
+>>>>>>> f9e11ffcfd7515ca7e1de7f7388480ee088d6f45
 
